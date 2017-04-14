@@ -1,24 +1,24 @@
-<% include ./partials/header %>
+<% include ./partiels/header %>
 
 
 <div class="ui main text container segment">
-	<div class="ui huge header">Edit <%= blog.title %></div>
+	<div class="ui huge header">Edit <%= entree.titre %></div>
 	<!-- Implementation du PUT request -->
-	<form class="ui form" action="/blogs/<%= blog._id %>?_method=PUT" method="POST">
+	<form class="ui form" action="/entrees/<%= entree._id %>?_method=PUT" method="POST">
 	<div class="field">
-		<label>Blog Title</label>
-		<input type="text" name="blog[title]" value="<%= blog.title %>">
+		<label>Titre</label>
+		<input type="text" name="entree[titre]" value="<%= entree.titre %>">
 	</div>
 	<div class="field">
-		<label>Link image</label>
-		<input type="text" name="blog[image]" value="<%= blog.image %>">
+		<label>Lien d'image</label>
+		<input type="text" name="entree[image]" value="<%= entree.image %>">
 	</div>
 	<div class="field">
-		<label>Insert your comment</label>
-		<textarea name="blog[body]"><%= blog.body %></textarea>
+		<label>Modifie ton commentaire...</label>
+		<textarea name="entree[body]"><%= entree.body %></textarea>
 	</div>
 		<input class="ui orange inverted big button" type="submit" value="Update">
 	</form>
 </div>
 
-<% include ./partials/footer %>
+<% include ./partiels/footer %>

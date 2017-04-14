@@ -16,113 +16,113 @@ app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
 // MONGOOSE/ MODEL CONFIG
-var blogSchema = new mongoose.Schema({
-	title: String,
+var entreeSchema = new mongoose.Schema({
+	titre: String,
 	image: String,
 	body: String,
-	created: {type:Date,default:Date.now}
+	creation: {type:Date,default:Date.now}
 });
 
-var Blog = mongoose.model("Blog",blogSchema);
+var Entree = mongoose.model("Entree",entreeSchema);
 
-// Blog.create({
-// 	title: "Test",
-// 	image:"http://www.placehold.it/240x280",
-// 	body: "Hello there"
-// }, function(err, createdBlog) {
-// 	var result = (err) ? err : "Blog a été créé" + createdBlog;
-// 	console.log(result);
-// });
-
+/* Entree.create({
+ *   titre: "Test",
+ *   image:"http://www.placehold.it/240x280&text=HelloWorld!",
+ *   body: "Hello there"
+ * }, function(err, entreeCreee) {
+ *   var result = (err) ? err : "Entree a été créé" + entreeCreee;
+ *   console.log(result);
+ * });
+ * */
 
 // RESTFUL ROUTES
 
 app.get("/",function(req, res){
-	res.redirect("/blogs");
+	res.redirect("/entrees");
 });
 
 // INDEX ROUTE
-app.get("/blogs",function(req, res){
-	Blog.find({}, function(err, blogs){
+app.get("/entrees",function(req, res){
+	Entree.find({}, function(err, entrees){
 		if (err) {
-			console.Log("error");
+			console.log("Erreur!");
 		} else {
-			res.render("index",{blogs:blogs});
+			res.render("index",{entrees:entrees});
 		}
 	});
 });
 
-// NEW ROUTE
-app.get("/blogs/new",function(req, res){
-	res.render("new");
+// NOUVELLE ROUTE
+app.get("/entrees/nouveau",function(req, res){
+	res.render("nouveau");
 });
 
 // CREATE ROUTE
-app.post("/blogs",function(req, res){
-	// create blog
+app.post("/entrees",function(req, res){
+	// create entree
 	console.log(req.body);
-	req.body.blog.body = req.sanitize(req.body.blog.body);
+	req.body.entree.body = req.sanitize(req.body.entree.body);
 	console.log("===============");
 	console.log(req.body);
-	Blog.create(req.body.blog, function(err, newBlog){
+	Entree.create(req.body.entree, function(err, nouvelleEntree){
 		if(err) {
-			res.render("new");
+			res.render("nouveau");
 		} else {
 			// then, redirect to the index
 			// ATTENTION A render vs. redirect
-			res.redirect("/blogs");
+			res.redirect("/entrees");
 		}
 	});
 })
 
 
 // SHOW ROUTE
-app.get("/blogs/:id",function(req, res){
-	Blog.findById(req.params.id, function(err, foundBlog){
+app.get("/entrees/:id",function(req, res){
+	Entree.findById(req.params.id, function(err, entreeTrouvee){
 		if(err){
-			res.redirect("/blogs");
+			res.redirect("/entrees");
 		} else {
-			res.render("show",{blog:foundBlog});
+			res.render("show",{entree:entreeTrouvee});
 		}
 	})
 });
 
 // EDIT ROUTE
-app.get("/blogs/:id/edit",function(req, res){
-	Blog.findById(req.params.id, function(err, foundBlog){
+app.get("/entrees/:id/edit",function(req, res){
+	Entree.findById(req.params.id, function(err, entreeTrouvee){
 		if(err){
-			res.redirect("/blogs");
+			res.redirect("/entrees");
 		} else {
-			res.render("edit", {blog:foundBlog});
+			res.render("edit", {entree:entreeTrouvee});
 		}
 	})
 });
 
 // UPDATE ROUTE
-app.put("/blogs/:id",function(req, res){
-	req.body.blog.body = req.sanitize(req.body.blog.body);
-	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
+app.put("/entrees/:id",function(req, res){
+	req.body.entree.body = req.sanitize(req.body.entree.body);
+	Entree.findByIdAndUpdate(req.params.id, req.body.entree, function(err, entreeMaj){
 		if(err){
-			res.redirect("/blogs");
+			res.redirect("/entrees");
 		} else {
-			res.redirect("/blogs/"+req.params.id);
+			res.redirect("/entrees/"+req.params.id);
 		}
 	});
 });
 
 // DELETE ROUTE
-app.delete("/blogs/:id",function(req, res){
-	// destroy blog
-	Blog.findByIdAndRemove(req.params.id, function(err){
+app.delete("/entrees/:id",function(req, res){
+	// destroy entree
+	Entree.findByIdAndRemove(req.params.id, function(err){
 		if(err){
-			res.redirect("/blogs");
+			res.redirect("/entrees");
 		} else {
-			res.redirect("/blogs");
+			res.redirect("/entrees");
 		}
 	});
 	// redirect somewhere
 });
 
 app.listen(3000,function(){
-	console.log("Server is up and running.");
+	console.log("Le serveur est en route!");
 });

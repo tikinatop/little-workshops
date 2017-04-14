@@ -1,4 +1,4 @@
-<% include ./partials/header %>
+<% include ./partiels/header %>
 
 
 <div class="ui main text container">
@@ -8,22 +8,22 @@
 
 
 
-			<% blogs.forEach(function(blog){ %>
+			<% entrees.forEach(function(entree){ %>
 			<div class="item">
 				<div class="image">
-					<img src="<%= blog.image %>">
+					<img src="<%= entree.image %>">
 				</div>
 				<div class="content">
-					<a class="header" href="/blogs/<%= blog._id %>"><%= blog.title %></a>
+					<a class="header" href="/entrees/<%= entree._id %>"><%= entree.titre %></a>
 					<div class="meta">
-						<span><%= blog.created.toDateString() %></span>
+						<span><%= entree.creation.toDateString() %></span>
 					</div>
 					<div class="description">
-						<p><%- blog.body.substring(0, 100) %>...</p>
+						<p><%- entree.body.substring(0, 100) %>... </p>
 					</div>
 					<div class="extra">
-					<a class="ui floated basic green button" href="/blogs/<%= blog._id %>">
-							Read More! <i class="right chevron icon"></i>
+					<a class="ui floated basic green button" href="/entrees/<%= entree._id %>">
+							Dérouler <i class="right chevron icon"></i>
 						</a></div>
 					</div>
 					<br>
@@ -38,4 +38,4 @@
 
 
 
-	<% include partials/footer %>
+	<% include partiels/footer %>

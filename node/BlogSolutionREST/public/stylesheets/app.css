@@ -9,3 +9,16 @@ i.icon {
 #delete {
 	display: inline;
 }
+
+.description > p {
+    color: #aaaaaa;
+}
+
+footer {
+    height:200px;
+    padding:150px;
+}
+
+footer > p {
+    text-align: right;
+}
